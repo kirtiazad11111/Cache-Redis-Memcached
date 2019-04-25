@@ -46,27 +46,35 @@ example-cronjob   * * * * *   False     0         40s             6m
 
 ## Steps to deploy Memchaed,Redis and Redis dummy data loader
 
-1) Deploy Memcached in EKS
+1) Clone this project onto your Docker Host.
+```
+https://github.com/kirtiazad11111/Cache-Redis-Memcached.git
+```
+2) Change the directory
+```
+cd Cache-Redis-Memcached
+```
+3) Deploy Memcached in EKS
 
 ```
 kubectl apply -f memcached.yml
 ```
-2) Deploy Redis in EKS as Redis is deplended on memcache so both can deploy on same node.
+4) Deploy Redis in EKS as Redis is deplended on memcache so both can deploy on same node.
 
 ```
 kubectl apply -f redis.yml
 ```
-3) Deploy Redis dummy data loader
+5) Deploy Redis dummy data loader
 
 ```
 kubect apply -f schedule.yml
 ```
-4) check cronjob of  Redis dummy data loader
+6) check cronjob of  Redis dummy data loader
 
 ```
 kubect get cronjob
 ```
-5) Check Deployed key in redis cluster
+7) Check Deployed key in redis cluster
  ```
   kubectl exec redis-0  redis-cli  keys \*
  ```
