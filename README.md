@@ -67,12 +67,12 @@ kubectl apply -f redis.yml
 5) Deploy Redis dummy data loader
 
 ```
-kubect apply -f schedule.yml
+kubect apply -f redis-scheduler.yml
 ```
 6) check cronjob of  Redis dummy data loader
 
 ```
-kubect get cronjob
+kubectl get cronjob
 ```
 7) Check Deployed key in redis cluster
  ```
