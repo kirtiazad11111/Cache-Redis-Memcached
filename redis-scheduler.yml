@@ -1,0 +1,18 @@
+apiVersion: batch/v1beta1
+kind: CronJob
+metadata:
+  name: hello
+spec:
+  schedule: "* * * * *"
+  jobTemplate:
+    spec:
+      template:
+        spec:
+          containers:
+          - name: hello
+            image: redis
+            command:
+            - bash
+            - -c
+            - redis-cli -h redis-cluster set $RANDOM $RANDOM
+          restartPolicy: OnFailure
