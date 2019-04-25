@@ -61,6 +61,10 @@ kubectl apply -f redis.yml
 ```
 kubect apply -f schedule.yml
 ```
+4) Check Deployed key in redis cluster
+ ```
+  kubectl exec redis-cluster-0  redis-cli  keys \*
+ ```
 
 ## Schedule Redis and memcached server on same node/host in kubernetes.
 
