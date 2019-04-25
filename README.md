@@ -44,7 +44,7 @@ NAME              SCHEDULE    SUSPEND   ACTIVE    LAST SCHEDULE   AGE
 example-cronjob   * * * * *   False     0         40s             6m
 ```
 
-* ## Steps to deploy Memchaed,Redis and Redis dummy data loader
+## Steps to deploy Memchaed,Redis and Redis dummy data loader
 
 1) Deploy Memcached in EKS
 
@@ -61,7 +61,12 @@ kubectl apply -f redis.yml
 ```
 kubect apply -f schedule.yml
 ```
-4) Check Deployed key in redis cluster
+4) check cronjob of  Redis dummy data loader
+
+```
+kubect get cronjob
+```
+5) Check Deployed key in redis cluster
  ```
   kubectl exec redis-0  redis-cli  keys \*
  ```
