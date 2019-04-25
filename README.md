@@ -6,7 +6,7 @@ Redis and Memcached docker container on an AWS ECS.
 redis-scheduler.yaml will create a CronJob resource in Kubernetes. Documentation: https://cloud.google.com/kubernetes-engine/docs/how-to/cronjobs
 
     * Invoke every five minutes
-    * set Random data in redis cluster using `set $RANDOM $RANDOM`
+    * set Random data in redis cluster using `set data-$RANDOM data-$RANDOM`
 ### redis-scheduler.yml
 ```
 apiVersion: batch/v1beta1
