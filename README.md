@@ -1,6 +1,6 @@
 # Cache-Redis-Memcached
 Redis and Memcached docker container on an AWS EKS.
-
+![](Cache-Redis-Memcached.gif)
 * ### Redis dummy data loader
 
 redis-scheduler.yaml will create a CronJob resource in Kubernetes. Documentation: https://cloud.google.com/kubernetes-engine/docs/how-to/cronjobs
