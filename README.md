@@ -48,7 +48,7 @@ example-cronjob   * * * * *   False     0         40s             6m
 
 1) Clone this project onto your Docker Host.
 ```
-https://github.com/kirtiazad11111/Cache-Redis-Memcached.git
+git clone https://github.com/kirtiazad11111/Cache-Redis-Memcached.git
 ```
 2) Change the directory
 ```
