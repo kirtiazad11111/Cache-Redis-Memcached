@@ -15,6 +15,18 @@ spec:
       labels:
         app: memcached
     spec:
+      affinity:
+        podAntiAffinity:
+          preferredDuringSchedulingIgnoredDuringExecution:
+          - weight: 100
+            podAffinityTerm:
+              labelSelector:
+                matchExpressions:
+                  - key: "app"
+                    operator: In
+                    values:
+                    - redis
+              topologyKey: "kubernetes.io/hostname"
       terminationGracePeriodSeconds: 1800
       containers:
       - name: memcached
@@ -30,17 +42,6 @@ spec:
           requests:
            cpu: "500m"
            memory: 1Gi
-        securityContext:
-          capabilities:
-            add:
-              - IPC_LOCK
-        lifecycle:
-          preStop:
-            exec:
-              command: 
-              - /bin/sh
-              - -c
-              - nodetool drain
 ---
 apiVersion: v1
 kind: Service
@@ -49,7 +50,7 @@ metadata:
     app: memcached
   name: memcached
 spec:
-  clusterIP: None
+  type: NodePort
   ports:
   - port: 11211
   selector:
