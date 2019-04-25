@@ -14,5 +14,5 @@ spec:
             command:
             - bash
             - -c
-            - redis-cli -h redis-cluster set data-$RANDOM data-$RANDOM
+            - redis-cli -h redis set data-$RANDOM data-$RANDOM
           restartPolicy: OnFailure
