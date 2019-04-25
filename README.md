@@ -51,7 +51,7 @@ example-cronjob   * * * * *   False     0         40s             6m
 ```
 kubectl apply -f memcached.yml
 ```
-2) Deploy Redis in EKS
+2) Deploy Redis in EKS as Redis is deplended on memcache so both can deploy on same node.
 
 ```
 kubectl apply -f redis.yml
@@ -62,8 +62,36 @@ kubectl apply -f redis.yml
 kubect apply -f schedule.yml
 ```
 
-## Redis Cluster 
+## Schedule Redis and memcached server on same node/host in kubernetes.
 
-* 
+* Used podAffinity `requiredDuringSchedulingIgnoredDuringExecution` in redis StatefulSet yml to schedule the redis pod in same node where memcached is deployed.
+
+```
+      affinity:
+        podAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+            - labelSelector:
+                matchExpressions:
+                  - key: "app"
+                    operator: In
+                    values:
+                    - memcached
+              topologyKey: "kubernetes.io/hostname"
+  ```
+ * Used podAffinity `preferredDuringSchedulingIgnoredDuringExecution` in memcached StatefulSet yml to schedule the memched pod in node where redis is deployed node.
+  ```
+        affinity:
+        podAntiAffinity:
+          preferredDuringSchedulingIgnoredDuringExecution:
+          - weight: 100
+            podAffinityTerm:
+              labelSelector:
+                matchExpressions:
+                  - key: "app"
+                    operator: In
+                    values:
+                    - redis-cluster
+              topologyKey: "kubernetes.io/hostname"
+  ```
 
 
